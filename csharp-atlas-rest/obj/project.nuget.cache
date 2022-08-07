@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "B36zMmKppKUzz3kCUCbhEJp37DxnKl8y5Y5fKQ/DBXNEs271OOeBUeTbXLxRpImQbH8VvKDfSSmYAa/KO+kCCA==",
+  "dgSpecHash": "JbUQ2aLmX+ePSE4vugTbAZmCLjw2xF5xNqdwMjZz6gwvM1Vhk3H2oiQcaxagh7MF+oYzN0xbCBExGJMXcs0oEg==",
   "success": true,
   "projectFilePath": "/home/malandr/RiderProjects/csharp-atlas-rest/csharp-atlas-rest/csharp-atlas-rest.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/home/malandr/.nuget/packages/htmlagilitypack/1.11.43/htmlagilitypack.1.11.43.nupkg.sha512"
+  ],
   "logs": []
 }

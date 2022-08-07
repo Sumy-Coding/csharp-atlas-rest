@@ -13,3 +13,5 @@
 /home/malandr/RiderProjects/csharp-atlas-rest/csharp-atlas-rest/obj/Debug/net6.0/csharp-atlas-rest.pdb
 /home/malandr/RiderProjects/csharp-atlas-rest/csharp-atlas-rest/obj/Debug/net6.0/csharp-atlas-rest.genruntimeconfig.cache
 /home/malandr/RiderProjects/csharp-atlas-rest/csharp-atlas-rest/obj/Debug/net6.0/ref/csharp-atlas-rest.dll
+/home/malandr/RiderProjects/csharp-atlas-rest/csharp-atlas-rest/bin/Debug/net6.0/HtmlAgilityPack.dll
+/home/malandr/RiderProjects/csharp-atlas-rest/csharp-atlas-rest/obj/Debug/net6.0/csharp-atlas-rest.csproj.CopyComplete
