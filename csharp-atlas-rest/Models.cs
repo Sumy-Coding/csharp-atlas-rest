@@ -31,4 +31,35 @@ namespace csharp_atlas_rest
         public Homepage Homepage { get; set; }
         public Homepage Expandable { get; set; }
     }
+
+    class CreateSpace
+    {
+        public string key { get; set; }
+        public string name { get; set; }
+    }
+
+    class CreatePage
+    {
+        public string title { get; set; }
+        public string type { get; set; }
+        public Body body { get; set; }
+        public string spaceKey { get; set; }
+        public List<Ancestor> ancestors  { get; set; }
+    }
+
+    internal class Ancestor
+    {
+        public string id { get; set; }
+    }
+
+    internal class Body
+    {
+        public Storage storage { get; set; }
+    }
+
+    internal class Storage
+    {
+        public string representation { get; set; }
+        public string value { get; set; }
+    }
 }
