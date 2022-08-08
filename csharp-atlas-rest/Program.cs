@@ -12,21 +12,19 @@ namespace Atlas
 
         static async Task Main(string[] args)
         {
+            string URL = "http://localhost:7190/rest/api/space";
             string user = "admin";
             string password = "admin";
             string token = Environment.GetEnvironmentVariable("TOKEN");
             
-            client.DefaultRequestHeaders.Add("Authorization", "Basic " + token);
-            var resp = client.GetAsync("http://localhost:7190/display/DEV2/DEV2+1");
-            var body = resp.Result.Content.ReadAsStringAsync();
-            Console.WriteLine(body.Result);
+            // client.DefaultRequestHeaders.Add("Authorization", "Basic " + token);
+            // var resp = client.GetAsync("http://localhost:7190/display/DEV2/DEV2+1");
+            // var body = resp.Result.Content.ReadAsStringAsync();
+            // Console.WriteLine(body.Result);
 
-            // var resStream = resp.Result.Content.ReadAsStream();
-            // var readInt = resStream.ReadByte();
-
-            HtmlService htmlService = new HtmlService();
-            htmlService.ParseContentHtml(body.Result);
-
+            SpaceService spaceService = new SpaceService();
+            var resp = spaceService.CreateSpace(URL, token, "CSHR1", "CSHR1");
+            Console.WriteLine(resp);
         }
         
         // async void getAsyncStreamss()
