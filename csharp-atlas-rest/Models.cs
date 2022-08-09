@@ -43,8 +43,13 @@ namespace csharp_atlas_rest
         public string title { get; set; }
         public string type { get; set; }
         public Body body { get; set; }
-        public string spaceKey { get; set; }
+        public CreateSpacePage space { get; set; }
         public List<Ancestor> ancestors  { get; set; }
+    }
+
+    internal class CreateSpacePage
+    {
+        public string key { get; set; }
     }
 
     internal class Ancestor

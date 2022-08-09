@@ -22,14 +22,17 @@ public class PageService
         storage.value = body;
         pageBody.storage = storage;
         createPage.body = pageBody;
-        createPage.spaceKey = key;
+        CreateSpacePage spacePage = new CreateSpacePage();
+        spacePage.key = key;
+        createPage.space = spacePage;
         List<Ancestor> ancestors = new List<Ancestor>();
         Ancestor ancestor = new Ancestor();
         ancestor.id = parentId;
-        ancestors[0] = ancestor;
+        ancestors.Add(ancestor);
         createPage.ancestors = ancestors;
 
         string pageJson = JsonSerializer.Serialize(createPage);
+        Console.WriteLine(pageJson);
         requestMessage.Content = new StringContent(pageJson, Encoding.UTF8, "application/json");
         
         var resp = client.SendAsync(requestMessage);
