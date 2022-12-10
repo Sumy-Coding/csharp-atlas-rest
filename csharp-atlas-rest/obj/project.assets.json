@@ -1,14 +1,18 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {
+    "net7.0": {
       "HtmlAgilityPack/1.11.43": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/HtmlAgilityPack.dll": {}
+          "lib/netstandard2.0/HtmlAgilityPack.dll": {
+            "related": ".deps.json;.pdb;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/HtmlAgilityPack.dll": {}
+          "lib/netstandard2.0/HtmlAgilityPack.dll": {
+            "related": ".deps.json;.pdb;.xml"
+          }
         }
       }
     }
@@ -64,34 +68,34 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net6.0": [
+    "net7.0": [
       "HtmlAgilityPack >= 1.11.43"
     ]
   },
   "packageFolders": {
-    "/home/malandr/.nuget/packages/": {}
+    "/home/andrii/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/malandr/RiderProjects/csharp-atlas-rest/csharp-atlas-rest/csharp-atlas-rest.csproj",
+      "projectUniqueName": "/home/andrii/RiderProjects/csharp-atlas-rest/csharp-atlas-rest/csharp-atlas-rest.csproj",
       "projectName": "csharp-atlas-rest",
-      "projectPath": "/home/malandr/RiderProjects/csharp-atlas-rest/csharp-atlas-rest/csharp-atlas-rest.csproj",
-      "packagesPath": "/home/malandr/.nuget/packages/",
-      "outputPath": "/home/malandr/RiderProjects/csharp-atlas-rest/csharp-atlas-rest/obj/",
+      "projectPath": "/home/andrii/RiderProjects/csharp-atlas-rest/csharp-atlas-rest/csharp-atlas-rest.csproj",
+      "packagesPath": "/home/andrii/.nuget/packages/",
+      "outputPath": "/home/andrii/RiderProjects/csharp-atlas-rest/csharp-atlas-rest/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/malandr/.nuget/NuGet/NuGet.Config"
+        "/home/andrii/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
-        "net6.0"
+        "net7.0"
       ],
       "sources": {
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "projectReferences": {}
         }
       },
@@ -102,8 +106,8 @@
       }
     },
     "frameworks": {
-      "net6.0": {
-        "targetAlias": "net6.0",
+      "net7.0": {
+        "targetAlias": "net7.0",
         "dependencies": {
           "HtmlAgilityPack": {
             "target": "Package",
@@ -116,16 +120,23 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[7.0.0, 7.0.0]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.302/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.100/RuntimeIdentifierGraph.json"
       }
     }
   }
