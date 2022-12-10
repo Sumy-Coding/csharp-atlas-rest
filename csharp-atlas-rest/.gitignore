@@ -1,2 +1,8 @@
 .vscode
 .idea
+.vscode
+.fleet
+*.iml
+.git
+obj/
+bin
