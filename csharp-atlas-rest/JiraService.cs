@@ -2,6 +2,7 @@ using System.Buffers.Text;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace csharp_atlas_rest;
 
@@ -21,16 +22,17 @@ public class JiraService
     public static string CreateIssue(string url, string token, CreateIssue createIssue)
     {
         /*
+         https://developer.atlassian.com/server/jira/platform/jira-rest-api-examples/
          {
             "fields": {
                "project":
                {
-                  "id": "10110"
+                  "name": "TEST"
                },
                "summary": "No REST for the Wicked.",
                "description": "Creating of an issue using IDs for projects and issue types using the REST API",
                "issuetype": {
-                  "id": "1"
+                  "name": "Bug"
                }
            }
         }
@@ -42,12 +44,12 @@ public class JiraService
 
         // CreateIssue createIssue = new CreateIssue();
         
-        string pageJson = JsonSerializer.Serialize(createIssue);
-        Console.WriteLine(pageJson);
-        requestMessage.Content = new StringContent(pageJson, Encoding.UTF8, "application/json");
-        
-        var resp = client.SendAsync(requestMessage);
-        
-        return resp.Result.ToString();
+        // string issueJson = JsonSerializer.Serialize(createIssue);
+        string issueJson = JsonConvert.SerializeObject(createIssue);
+        Console.WriteLine(issueJson);
+        requestMessage.Content = new StringContent(issueJson, Encoding.UTF8, "application/json");
+        Task<HttpResponseMessage> resp = client.SendAsync(requestMessage);
+        // return Body (content)
+        return resp.Result.Content.ReadAsStringAsync().Result.ToString();
     }
 }

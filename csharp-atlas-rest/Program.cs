@@ -19,18 +19,32 @@ namespace Atlas
             // string token = Environment.GetEnvironmentVariable("TOKEN");
             string token = System.Convert.ToBase64String(Encoding.UTF8.GetBytes($"{user}:{password}"));
 
-            // ACTION
+            // Actions
+            
             // GET issue
-            var resp = JiraService.GetIssue(ISSUE_REST_URL, token, "TEST-1");
-            Console.WriteLine(resp);   
+            // var resp = JiraService.GetIssue(ISSUE_REST_URL, token, "TEST-1");
+            // Console.WriteLine(resp);   
             
             // CREATE Issue
             CreateIssue createIssue = new CreateIssue
             {
-                
+                fields = new Fields
+                {
+                    Description = "test",
+                    issueType = new IssueType
+                    {
+                        Name = "Bug"
+                    },
+                    Project = new Project()
+                    {
+                        Key = "TEST"
+                    },
+                    Summary = "TEST"
+                }
             };
-            string createdIssue = JiraService.CreateIssue(ISSUE_REST_URL, token, createIssue: createIssue);
             Console.WriteLine(createIssue);
+            string createdIssue = JiraService.CreateIssue(ISSUE_REST_URL, token, createIssue);
+            Console.WriteLine(createdIssue);
                 
             // ===== create space
             // SpaceService spaceService = new SpaceService();
