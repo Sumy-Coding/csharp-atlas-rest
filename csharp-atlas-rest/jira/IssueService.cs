@@ -4,14 +4,17 @@ using System.Text;
 using System.Text.Json;
 using csharp_atlas_rest.jira.Create;
 using csharp_atlas_rest.jira;
+using csharp_atlas_rest.jira.Update;
 
 namespace csharp_atlas_rest.jira;
 
-public class JiraService
+public class IssueService
 {
+    private static string APP_JSON = "application/json";
+    static HttpClient client = new ();
+
     public static Issue GetIssue(string host, string token, string key)
     {
-        HttpClient client = new HttpClient();
         client.DefaultRequestHeaders.Add("Authorization", $"Basic {token}");
         HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, $"{host}/rest/api/2/issue/{key}");
         Console.WriteLine($"Getting issue with URL = {host} :: {key}");
@@ -39,17 +42,37 @@ public class JiraService
            }
         }
          */
-        HttpClient client = new HttpClient();
+        
         client.DefaultRequestHeaders.Add("Authorization", $"Basic {token}");
-        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(APP_JSON));
         
         HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, $"{host}/rest/api/2/issue/");
 
         string issueJson = JsonSerializer.Serialize(createIssue);
-        Console.WriteLine(issueJson);
-        request.Content = new StringContent(issueJson, Encoding.UTF8, "application/json");
+        // Console.WriteLine(issueJson);
+        request.Content = new StringContent(issueJson, Encoding.UTF8, APP_JSON);
         Task<HttpResponseMessage> resp = client.SendAsync(request);
         // return Body (content)
         return resp.Result.Content.ReadAsStringAsync().Result.ToString();
     }
+
+    public Issue UpdateIssue(string host, string token, UpdateIssue updateIssue)
+    {
+        HttpClient client = new HttpClient();
+        client.DefaultRequestHeaders.Add("Authorization", $"Basic {token}");
+        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, APP_JSON);
+        string reqJson = JsonSerializer.Serialize(updateIssue);
+        request.Content = new StringContent(reqJson, Encoding.UTF8, APP_JSON);
+
+        var resp = IssueService.client.SendAsync(request);
+        var result = JsonSerializer.Deserialize<Issue>(resp.Result.Content.ReadAsStringAsync().Result);
+        if (result != null)
+        {
+            return result;
+        }
+
+        return new Issue();
+;    }
 }

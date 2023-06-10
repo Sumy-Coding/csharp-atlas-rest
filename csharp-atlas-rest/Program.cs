@@ -29,36 +29,36 @@ namespace csharp_atlas_rest
             // Console.WriteLine(resp);   
 
             // CREATE Issue
-            for (int i = 0; i < 20; i++)
-            {
-                CreateIssue createIssue = new CreateIssue
-                {
-                    id = null,
-                
-                    fields = new Fields()
-                    {
-                        description = $"Some issue desciption {i}",
-                        issuetype = new Issuetype()
-                        {
-                            id = 10006
-                        },
-                        project = new Project()
-                        {
-                            key = "AAA"
-                        },
-                        summary = $"AAA Issue {i}"
-                    }
-                };
-                Console.WriteLine(createIssue);
-                string createdIssue = JiraService.CreateIssue(JIRA_HOST, token, createIssue);
-                Console.WriteLine(createdIssue);
-            }
+            // for (int i = 0; i < 20; i++)
+            // {
+            //     CreateIssue createIssue = new CreateIssue
+            //     {
+            //         id = null,
+            //     
+            //         fields = new Fields()
+            //         {
+            //             description = $"Some issue desciption {i}",
+            //             issuetype = new Issuetype()
+            //             {
+            //                 id = 10006
+            //             },
+            //             project = new Project()
+            //             {
+            //                 key = "AAA"
+            //             },
+            //             summary = $"AAA Issue {i}"
+            //         }
+            //     };
+            //     Console.WriteLine(createIssue);
+            //     string createdIssue = IssueService.CreateIssue(JIRA_HOST, token, createIssue);
+            //     Console.WriteLine(createdIssue);
+            // }
 
-            // ===== create space
-            // SpaceService spaceService = new SpaceService();
-            // var resp = spaceService.CreateSpace(URL, token, "CSHR1", "CSHR1");
-
-            // Console.WriteLine(resp);
+            // comments
+            var comments = CommentService.GetIssueComments(JIRA_HOST, token, "AAA-5");
+            Console.WriteLine(comments);
+            
+            // ====== END
             Console.WriteLine($"*** The action took {DateTime.Now.Subtract(start).Milliseconds}");
         }
 
