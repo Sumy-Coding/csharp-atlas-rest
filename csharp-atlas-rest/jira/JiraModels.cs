@@ -15,6 +15,7 @@ namespace csharp_atlas_rest.jira
             return $"Issue: {id} {self} {key} {fields}";
         }
     }
+
     public class Aggregateprogress
     {
         public int progress { get; set; }
@@ -23,17 +24,13 @@ namespace csharp_atlas_rest.jira
 
     public class AvatarUrls
     {
-        [JsonPropertyName("48x48")]
-        public string _48x48 { get; set; }
+        [JsonPropertyName("48x48")] public string _48x48 { get; set; }
 
-        [JsonPropertyName("24x24")]
-        public string _24x24 { get; set; }
+        [JsonPropertyName("24x24")] public string _24x24 { get; set; }
 
-        [JsonPropertyName("16x16")]
-        public string _16x16 { get; set; }
+        [JsonPropertyName("16x16")] public string _16x16 { get; set; }
 
-        [JsonPropertyName("32x32")]
-        public string _32x32 { get; set; }
+        [JsonPropertyName("32x32")] public string _32x32 { get; set; }
     }
 
     public class Comment
@@ -155,7 +152,6 @@ namespace csharp_atlas_rest.jira
         public string timeZone { get; set; }
     }
 
-    
 
     public class Status
     {
@@ -218,8 +214,8 @@ namespace csharp_atlas_rest.jira
             public string self { get; set; }
             public string key { get; set; }
             public Fields fields { get; set; }
-        }  
-    
+        }
+
         public class Fields
         {
             public string summary { get; set; }
@@ -245,103 +241,132 @@ namespace csharp_atlas_rest.jira
     namespace Update
     {
         // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
-    public class Actor
+        public class Actor
+        {
+            public string id { get; set; }
+            public string displayName { get; set; }
+            public string type { get; set; }
+            public string avatarUrl { get; set; }
+            public string url { get; set; }
+        }
+
+        public class Cause
+        {
+            public string id { get; set; }
+            public string type { get; set; }
+        }
+
+        public class Component
+        {
+            public string set { get; set; }
+        }
+
+        public class Edit
+        {
+            public string originalEstimate { get; set; }
+            public string remainingEstimate { get; set; }
+        }
+
+        public class ExtraData
+        {
+            public string keyvalue { get; set; }
+            public string goes { get; set; }
+        }
+
+        public class Fields
+        {
+            public string summary { get; set; }
+            public int customfield_10010 { get; set; }
+            public string customfield_10000 { get; set; }
+        }
+
+        public class Generator
+        {
+            public string id { get; set; }
+            public string type { get; set; }
+        }
+
+        public class HistoryMetadata
+        {
+            public string type { get; set; }
+            public string description { get; set; }
+            public string descriptionKey { get; set; }
+            public string activityDescription { get; set; }
+            public string activityDescriptionKey { get; set; }
+            public Actor actor { get; set; }
+            public Generator generator { get; set; }
+            public Cause cause { get; set; }
+            public ExtraData extraData { get; set; }
+        }
+
+        public class Label
+        {
+            public string add { get; set; }
+            public string remove { get; set; }
+        }
+
+        public class Property
+        {
+            public string key { get; set; }
+        }
+
+        public class UpdateIssue
+        {
+            public Update update { get; set; }
+            public Fields fields { get; set; }
+            public HistoryMetadata historyMetadata { get; set; }
+            public List<Property> properties { get; set; }
+        }
+
+        public class Summary
+        {
+            public string set { get; set; }
+        }
+
+        public class Timetracking
+        {
+            public Edit edit { get; set; }
+        }
+
+        public class Update
+        {
+            public List<Summary> summary { get; set; }
+            public List<Component> components { get; set; }
+            public List<Timetracking> timetracking { get; set; }
+            public List<Label> labels { get; set; }
+        }
+    }
+
+    namespace Projects
     {
-        public string id { get; set; }
-        public string displayName { get; set; }
-        public string type { get; set; }
-        public string avatarUrl { get; set; }
-        public string url { get; set; }
-    }
+        public class CreateProject
+        {
+            public string key { get; set; }
+            public string name { get; set; }
+            public string projectTypeKey { get; set; }
+            // public string projectTemplateKey { get; set; }
+            public string description { get; set; }
+            // public string lead { get; set; }
+            // public string url { get; set; }
+            // public string assigneeType { get; set; }
+            // public int avatarId { get; set; }
+            // public int issueSecurityScheme { get; set; }
+            // public int permissionScheme { get; set; }
+            // public int notificationScheme { get; set; }
+            // public int workflowSchemeId { get; set; }
+            // public int categoryId { get; set; }
+        }
+        
+        public class CreatedProject
+        {
+            public string self { get; set; }
+            public int id { get; set; }
+            public string key { get; set; }
 
-    public class Cause
-    {
-        public string id { get; set; }
-        public string type { get; set; }
+            public override string ToString()
+            {
+                return $"CreatedProject: id: {id}, key:  {key}";
+            }
+        }
     }
-
-    public class Component
-    {
-        public string set { get; set; }
-    }
-
-    public class Edit
-    {
-        public string originalEstimate { get; set; }
-        public string remainingEstimate { get; set; }
-    }
-
-    public class ExtraData
-    {
-        public string keyvalue { get; set; }
-        public string goes { get; set; }
-    }
-
-    public class Fields
-    {
-        public string summary { get; set; }
-        public int customfield_10010 { get; set; }
-        public string customfield_10000 { get; set; }
-    }
-
-    public class Generator
-    {
-        public string id { get; set; }
-        public string type { get; set; }
-    }
-
-    public class HistoryMetadata
-    {
-        public string type { get; set; }
-        public string description { get; set; }
-        public string descriptionKey { get; set; }
-        public string activityDescription { get; set; }
-        public string activityDescriptionKey { get; set; }
-        public Actor actor { get; set; }
-        public Generator generator { get; set; }
-        public Cause cause { get; set; }
-        public ExtraData extraData { get; set; }
-    }
-
-    public class Label
-    {
-        public string add { get; set; }
-        public string remove { get; set; }
-    }
-
-    public class Property
-    {
-        public string key { get; set; }
-    }
-
-    public class UpdateIssue
-    {
-        public Update update { get; set; }
-        public Fields fields { get; set; }
-        public HistoryMetadata historyMetadata { get; set; }
-        public List<Property> properties { get; set; }
-    }
-
-    public class Summary
-    {
-        public string set { get; set; }
-    }
-
-    public class Timetracking
-    {
-        public Edit edit { get; set; }
-    }
-
-    public class Update
-    {
-        public List<Summary> summary { get; set; }
-        public List<Component> components { get; set; }
-        public List<Timetracking> timetracking { get; set; }
-        public List<Label> labels { get; set; }
-    }
-
-
-    }
-    
 }
-

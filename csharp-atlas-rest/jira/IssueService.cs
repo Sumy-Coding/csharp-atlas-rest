@@ -46,10 +46,12 @@ public class IssueService
         client.DefaultRequestHeaders.Add("Authorization", $"Basic {token}");
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(APP_JSON));
         
-        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, $"{host}/rest/api/2/issue/");
+        HttpRequestMessage request = new (
+            HttpMethod.Post, 
+            $"{host}/rest/api/2/issue/");
 
         string issueJson = JsonSerializer.Serialize(createIssue);
-        // Console.WriteLine(issueJson);
+        
         request.Content = new StringContent(issueJson, Encoding.UTF8, APP_JSON);
         Task<HttpResponseMessage> resp = client.SendAsync(request);
         // return Body (content)

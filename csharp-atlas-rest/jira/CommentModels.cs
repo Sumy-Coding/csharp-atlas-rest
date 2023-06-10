@@ -20,6 +20,11 @@ namespace csharp_atlas_rest.jira
             public string created { get; set; }
             public string updated { get; set; }
             public Visibility visibility { get; set; }
+
+            public override string ToString()
+            {
+                return $"Comment: {id} : {author} : {body} : {created}";
+            }
         }
 
         public class IssueCommentsResult
@@ -36,6 +41,11 @@ namespace csharp_atlas_rest.jira
             public string name { get; set; }
             public string displayName { get; set; }
             public bool active { get; set; }
+            
+            public override string ToString()
+            {
+                return $"UpdateAuthor: {name} : {displayName} : {active} ";
+            }
         }
 
         public class Visibility

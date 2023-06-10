@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using csharp_atlas_rest.jira;
 using csharp_atlas_rest.jira.Create;
+using csharp_atlas_rest.jira.Projects;
 using Fields = csharp_atlas_rest.jira.Create.Fields;
 using Issuetype = csharp_atlas_rest.jira.Create.Issuetype;
 using Project = csharp_atlas_rest.jira.Create.Project;
@@ -55,9 +56,20 @@ namespace csharp_atlas_rest
             // }
 
             // comments
-            var comments = CommentService.GetIssueComments(JIRA_HOST, token, "AAA-5");
-            Console.WriteLine(comments);
-            
+            // var comments = CommentService.GetIssueComments(JIRA_HOST, token, "AAA-5");
+            // comments.comments.ForEach(c => Console.WriteLine(c));
+
+            var data = new CreateProject
+            {
+                key = "BBB2",
+                name = "Project BBB 2",
+                projectTypeKey = "software",
+                description = "test"
+                
+            };
+            var project = ProjectService.CreateProject(JIRA_HOST, token, data);
+            Console.WriteLine(project);
+
             // ====== END
             Console.WriteLine($"*** The action took {DateTime.Now.Subtract(start).Milliseconds}");
         }
