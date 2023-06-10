@@ -2,20 +2,22 @@ using System.Buffers.Text;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using Newtonsoft.Json;
+using csharp_atlas_rest.jira.Create;
+using csharp_atlas_rest.jira;
 
-namespace csharp_atlas_rest;
+namespace csharp_atlas_rest.jira;
 
 public class JiraService
 {
-    public static string GetIssue(string url, string token, string key)
+    public static Issue GetIssue(string host, string token, string key)
     {
         HttpClient client = new HttpClient();
         client.DefaultRequestHeaders.Add("Authorization", $"Basic {token}");
-        HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, $"{url}/{key}");
-        Console.WriteLine($"Getting issue with URL = {url}/{key}");
-        var resp = client.SendAsync(requestMessage);
-        var issue = resp.Result.Content.ReadAsStringAsync().Result;
+        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, $"{host}/rest/api/2/issue/{key}");
+        Console.WriteLine($"Getting issue with URL = {host} :: {key}");
+        var resp = client.SendAsync(request);
+        var respString = resp.Result.Content.ReadAsStringAsync().Result;
+        Issue issue = JsonSerializer.Deserialize<Issue>(respString);
         return issue;
     }
     
@@ -38,17 +40,15 @@ public class JiraService
         }
          */
         HttpClient client = new HttpClient();
-        client.DefaultRequestHeaders.Add("Authorization", "Basic " + token);
+        client.DefaultRequestHeaders.Add("Authorization", $"Basic {token}");
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, url);
-
-        // CreateIssue createIssue = new CreateIssue();
         
-        // string issueJson = JsonSerializer.Serialize(createIssue);
-        string issueJson = JsonConvert.SerializeObject(createIssue);
+        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url);
+
+        string issueJson = JsonSerializer.Serialize(createIssue);
         Console.WriteLine(issueJson);
-        requestMessage.Content = new StringContent(issueJson, Encoding.UTF8, "application/json");
-        Task<HttpResponseMessage> resp = client.SendAsync(requestMessage);
+        request.Content = new StringContent(issueJson, Encoding.UTF8, "application/json");
+        Task<HttpResponseMessage> resp = client.SendAsync(request);
         // return Body (content)
         return resp.Result.Content.ReadAsStringAsync().Result.ToString();
     }

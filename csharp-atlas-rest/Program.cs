@@ -1,8 +1,8 @@
 ﻿using System.Text;
-using System.Text.Json.Serialization;
 using csharp_atlas_rest;
+using csharp_atlas_rest.jira;
 
-namespace Atlas
+namespace csharp_atlas_rest
 {
     class Program
     {
@@ -12,39 +12,39 @@ namespace Atlas
         {
             var start =  DateTime.Now;
             
-            const string CORE_URL = "http://localhost:9500"; // Jira
-            const string ISSUE_REST_URL = "http://localhost:9500/rest/api/2/issue";
+            const string JIRA_HOST = "http://localhost:9500";
             const string user = "admin";
             const string password = "admin";
             // string token = Environment.GetEnvironmentVariable("TOKEN");
-            string token = System.Convert.ToBase64String(Encoding.UTF8.GetBytes($"{user}:{password}"));
+            string token = System.Convert.ToBase64String(
+                Encoding.UTF8.GetBytes($"{user}:{password}"));
 
             // Actions
             
             // GET issue
-            // var resp = JiraService.GetIssue(ISSUE_REST_URL, token, "TEST-1");
-            // Console.WriteLine(resp);   
+            var resp = JiraService.GetIssue(JIRA_HOST, token, "AAA-1");
+            Console.WriteLine(resp);   
             
             // CREATE Issue
-            CreateIssue createIssue = new CreateIssue
-            {
-                fields = new Fields
-                {
-                    Description = "test",
-                    issueType = new IssueType
-                    {
-                        Name = "Bug"
-                    },
-                    Project = new Project()
-                    {
-                        Key = "TEST"
-                    },
-                    Summary = "TEST"
-                }
-            };
-            Console.WriteLine(createIssue);
-            string createdIssue = JiraService.CreateIssue(ISSUE_REST_URL, token, createIssue);
-            Console.WriteLine(createdIssue);
+            // CreateIssue createIssue = new CreateIssue
+            // {
+            //     fields = new Fields
+            //     {
+            //         Description = "test",
+            //         issueType = new IssueType
+            //         {
+            //             Name = "Bug"
+            //         },
+            //         Project = new Project()
+            //         {
+            //             Key = "TEST"
+            //         },
+            //         Summary = "TEST"
+            //     }
+            // };
+            // Console.WriteLine(createIssue);
+            // string createdIssue = JiraService.CreateIssue(ISSUE_REST_URL, token, createIssue);
+            // Console.WriteLine(createdIssue);
                 
             // ===== create space
             // SpaceService spaceService = new SpaceService();

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace csharp_atlas_rest
+namespace csharp_atlas_rest.confluence
 {
     class Content
     {

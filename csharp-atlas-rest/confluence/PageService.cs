@@ -2,16 +2,16 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 
-namespace csharp_atlas_rest;
+namespace csharp_atlas_rest.confluence;
 
 public class PageService
 {
-    public string CreatePage(string url, string token, string title, string body, string key, string parentId)
+    public string CreatePage(string host, string token, string title, string body, string key, string parentId)
     {
         HttpClient client = new HttpClient();
-        client.DefaultRequestHeaders.Add("Authorization", "Basic " + token);
+        client.DefaultRequestHeaders.Add("Authorization", $"Basic {token}");
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, url);
+        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, $"{host}/rest/api/content");
 
         CreatePage createPage = new CreatePage();
         createPage.title = title;
@@ -33,9 +33,9 @@ public class PageService
 
         string pageJson = JsonSerializer.Serialize(createPage);
         Console.WriteLine(pageJson);
-        requestMessage.Content = new StringContent(pageJson, Encoding.UTF8, "application/json");
+        request.Content = new StringContent(pageJson, Encoding.UTF8, "application/json");
         
-        var resp = client.SendAsync(requestMessage);
+        var resp = client.SendAsync(request);
         
         return resp.Result.ToString();
     }

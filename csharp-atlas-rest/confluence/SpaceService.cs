@@ -3,17 +3,17 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 
-namespace csharp_atlas_rest;
+namespace csharp_atlas_rest.confluence;
 
 public class SpaceService
 {
-    public string CreateSpace(string url, string token, string key, string name)
+    public string CreateSpace(string host, string token, string key, string name)
     {
         HttpClient client = new HttpClient();
         // client.BaseAddress = new Uri("http://example.com/");
         client.DefaultRequestHeaders.Add("Authorization", "Basic " + token);
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, "http://localhost:7190/rest/api/space");
+        HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, $"{host}/rest/api/space");
 
         CreateSpace space = new CreateSpace();
         space.key = key;
