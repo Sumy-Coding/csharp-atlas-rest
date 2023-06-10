@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Uu+xCooKUn8O+7nVSJGAlve6hdgLBGP4VODD2L0bF3imTVRQ3dJU3lrP8au2KoXLGM8GzJEAf2G+cIGaIUfN8A==",
+  "dgSpecHash": "OWoZ3FZFDN82gS5sugs1Iw+Ypjp/wNRAugYnadmKn6xgBY5AN7lzsegDDmc8Bh1+LG/moaXZt3XLZ1RDNb+9Sw==",
   "success": true,
-  "projectFilePath": "/home/malandr/RiderProjects/csharp-atlas-rest/csharp-atlas-rest/csharp-atlas-rest.csproj",
+  "projectFilePath": "/home/andrii/RiderProjects/csharp-atlas-rest/csharp-atlas-rest/csharp-atlas-rest.csproj",
   "expectedPackageFiles": [
-    "/home/malandr/.nuget/packages/htmlagilitypack/1.11.43/htmlagilitypack.1.11.43.nupkg.sha512"
+    "/home/andrii/.nuget/packages/htmlagilitypack/1.11.43/htmlagilitypack.1.11.43.nupkg.sha512"
   ],
   "logs": []
 }
