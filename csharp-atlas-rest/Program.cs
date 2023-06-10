@@ -1,6 +1,9 @@
 ﻿using System.Text;
-using csharp_atlas_rest;
 using csharp_atlas_rest.jira;
+using csharp_atlas_rest.jira.Create;
+using Fields = csharp_atlas_rest.jira.Create.Fields;
+using Issuetype = csharp_atlas_rest.jira.Create.Issuetype;
+using Project = csharp_atlas_rest.jira.Create.Project;
 
 namespace csharp_atlas_rest
 {
@@ -10,8 +13,8 @@ namespace csharp_atlas_rest
 
         static async Task Main(string[] args)
         {
-            var start =  DateTime.Now;
-            
+            var start = DateTime.Now;
+
             const string JIRA_HOST = "http://localhost:9500";
             const string user = "admin";
             const string password = "admin";
@@ -20,46 +23,49 @@ namespace csharp_atlas_rest
                 Encoding.UTF8.GetBytes($"{user}:{password}"));
 
             // Actions
-            
+
             // GET issue
-            var resp = JiraService.GetIssue(JIRA_HOST, token, "AAA-1");
-            Console.WriteLine(resp);   
-            
+            // var resp = JiraService.GetIssue(JIRA_HOST, token, "AAA-1");
+            // Console.WriteLine(resp);   
+
             // CREATE Issue
-            // CreateIssue createIssue = new CreateIssue
-            // {
-            //     fields = new Fields
-            //     {
-            //         Description = "test",
-            //         issueType = new IssueType
-            //         {
-            //             Name = "Bug"
-            //         },
-            //         Project = new Project()
-            //         {
-            //             Key = "TEST"
-            //         },
-            //         Summary = "TEST"
-            //     }
-            // };
-            // Console.WriteLine(createIssue);
-            // string createdIssue = JiraService.CreateIssue(ISSUE_REST_URL, token, createIssue);
-            // Console.WriteLine(createdIssue);
+            for (int i = 0; i < 20; i++)
+            {
+                CreateIssue createIssue = new CreateIssue
+                {
+                    id = null,
                 
+                    fields = new Fields()
+                    {
+                        description = $"Some issue desciption {i}",
+                        issuetype = new Issuetype()
+                        {
+                            id = 10006
+                        },
+                        project = new Project()
+                        {
+                            key = "AAA"
+                        },
+                        summary = $"AAA Issue {i}"
+                    }
+                };
+                Console.WriteLine(createIssue);
+                string createdIssue = JiraService.CreateIssue(JIRA_HOST, token, createIssue);
+                Console.WriteLine(createdIssue);
+            }
+
             // ===== create space
             // SpaceService spaceService = new SpaceService();
             // var resp = spaceService.CreateSpace(URL, token, "CSHR1", "CSHR1");
-           
+
             // Console.WriteLine(resp);
-            Console.WriteLine("*** The action took " + DateTime.Now.Subtract(start).Milliseconds);
+            Console.WriteLine($"*** The action took {DateTime.Now.Subtract(start).Milliseconds}");
         }
-        
+
         // async void getAsyncStreamss()
         // {
         //     var streamTask = client.GetStreamAsync("https://api.github.com/orgs/dotnet/repos");
         //     var repositories = await JsonSerializer.DeserializeAsync<List<Repository>>(await streamTask);
         // }
     }
-   
-    
 }

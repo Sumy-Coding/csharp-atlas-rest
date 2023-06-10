@@ -21,7 +21,7 @@ public class JiraService
         return issue;
     }
     
-    public static string CreateIssue(string url, string token, CreateIssue createIssue)
+    public static string CreateIssue(string host, string token, CreateIssue createIssue)
     {
         /*
          https://developer.atlassian.com/server/jira/platform/jira-rest-api-examples/
@@ -43,7 +43,7 @@ public class JiraService
         client.DefaultRequestHeaders.Add("Authorization", $"Basic {token}");
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         
-        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url);
+        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, $"{host}/rest/api/2/issue/");
 
         string issueJson = JsonSerializer.Serialize(createIssue);
         Console.WriteLine(issueJson);

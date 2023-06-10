@@ -210,34 +210,137 @@ namespace csharp_atlas_rest.jira
         public List<object> worklogs { get; set; }
     }
 
-
     namespace Create
     {
         public class CreateIssue
         {
-            public string Id { get; set; }
-            public string Self { get; set; }
-            public string Key { get; set; }
-            public Fields Fields { get; set; }
+            public string id { get; set; }
+            public string self { get; set; }
+            public string key { get; set; }
+            public Fields fields { get; set; }
         }  
     
         public class Fields
         {
-            public string Summary { get; set; }
-            public string Description { get; set; }
-            public Project Project { get; set; }
-            public Issuetype Issuetype { get; set; }
+            public string summary { get; set; }
+            public string description { get; set; }
+            public Project project { get; set; }
+            public Issuetype issuetype { get; set; }
         }
 
         public class Issuetype
         {
-            public string Name { get; set; }
+            public string name { get; set; }
+            public int id { get; set; }
         }
 
         public class Project
         {
-            public string Name { get; set; }
+            public string name { get; set; }
+            public string key { get; set; }
+            public string id { get; set; }
         }
+    }
+
+    namespace Update
+    {
+        // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+    public class Actor
+    {
+        public string id { get; set; }
+        public string displayName { get; set; }
+        public string type { get; set; }
+        public string avatarUrl { get; set; }
+        public string url { get; set; }
+    }
+
+    public class Cause
+    {
+        public string id { get; set; }
+        public string type { get; set; }
+    }
+
+    public class Component
+    {
+        public string set { get; set; }
+    }
+
+    public class Edit
+    {
+        public string originalEstimate { get; set; }
+        public string remainingEstimate { get; set; }
+    }
+
+    public class ExtraData
+    {
+        public string keyvalue { get; set; }
+        public string goes { get; set; }
+    }
+
+    public class Fields
+    {
+        public string summary { get; set; }
+        public int customfield_10010 { get; set; }
+        public string customfield_10000 { get; set; }
+    }
+
+    public class Generator
+    {
+        public string id { get; set; }
+        public string type { get; set; }
+    }
+
+    public class HistoryMetadata
+    {
+        public string type { get; set; }
+        public string description { get; set; }
+        public string descriptionKey { get; set; }
+        public string activityDescription { get; set; }
+        public string activityDescriptionKey { get; set; }
+        public Actor actor { get; set; }
+        public Generator generator { get; set; }
+        public Cause cause { get; set; }
+        public ExtraData extraData { get; set; }
+    }
+
+    public class Label
+    {
+        public string add { get; set; }
+        public string remove { get; set; }
+    }
+
+    public class Property
+    {
+        public string key { get; set; }
+    }
+
+    public class UpdateIssue
+    {
+        public Update update { get; set; }
+        public Fields fields { get; set; }
+        public HistoryMetadata historyMetadata { get; set; }
+        public List<Property> properties { get; set; }
+    }
+
+    public class Summary
+    {
+        public string set { get; set; }
+    }
+
+    public class Timetracking
+    {
+        public Edit edit { get; set; }
+    }
+
+    public class Update
+    {
+        public List<Summary> summary { get; set; }
+        public List<Component> components { get; set; }
+        public List<Timetracking> timetracking { get; set; }
+        public List<Label> labels { get; set; }
+    }
+
+
     }
     
 }
