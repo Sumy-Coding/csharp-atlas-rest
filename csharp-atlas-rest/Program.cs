@@ -27,28 +27,28 @@ namespace csharp_atlas_rest
             // Console.WriteLine(resp);   
 
             // CREATE Issue
-            for (int i = 0; i < 1; i++)
-            {
-                CreateIssue createIssue = new CreateIssue
-                {
-                    fields = new Fields()
-                    {
-                        description = $"Some issue desciption {i}",
-                        issuetype = new Issuetype()
-                        {
-                            id = 10006
-                        },
-                        project = new Project()
-                        {
-                            key = "AAA"
-                        },
-                        summary = "CCC Issue "
-                    }
-                };
-                Console.WriteLine(createIssue);
-                string createdIssue = IssueService.CreateIssue(JIRA_HOST, token, createIssue);
-                Console.WriteLine(createdIssue);
-            }
+            // for (int i = 0; i < 5; i++)
+            // {
+            //     CreateIssue createIssue = new CreateIssue
+            //     {
+            //         fields = new Fields()
+            //         {
+            //             description = $"Some issue desciption {i}",
+            //             issuetype = new Issuetype()
+            //             {
+            //                 id = 10006
+            //             },
+            //             project = new Project()
+            //             {
+            //                 key = "CCC"
+            //             },
+            //             summary = "CCC Issue "
+            //         }
+            //     };
+            //     Console.WriteLine(createIssue);
+            //     string createdIssue = IssueService.CreateIssue(JIRA_HOST, token, createIssue);
+            //     Console.WriteLine(createdIssue);
+            // }
 
             // comments
             // var comments = CommentService.GetIssueComments(JIRA_HOST, token, "AAA-5");
@@ -72,16 +72,16 @@ namespace csharp_atlas_rest
     }
 ";
 
-            // var data = new CreateProject
-            // {
-            //     key = "BBB2",
-            //     name = "Project BBB 2",
-            //     projectTypeKey = "software",
-            //     description = "test"
-            //     
-            // };
-            // var project = ProjectService.CreateProject(JIRA_HOST, token, data);
-            // Console.WriteLine(project);
+            var data = new CreateProject
+            {
+                key = "BBB2",
+                name = "Project BBB 2",
+                projectTypeKey = "software",
+                description = "test"
+                
+            };
+            var project = ProjectService.CreateProject(JIRA_HOST, token, data);
+            Console.WriteLine(project);
 
             // ====== END
             Console.WriteLine($"*** The action took {DateTime.Now.Subtract(start).Milliseconds}");

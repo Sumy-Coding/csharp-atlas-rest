@@ -64,6 +64,7 @@ public class ProjectService
         Task<HttpResponseMessage> resp = client.SendAsync(request);
         Console.WriteLine(resp.Result.StatusCode.ToString());
         Console.WriteLine(resp.Result.Content.ReadAsStringAsync());
+        Console.WriteLine(resp.Result.ReasonPhrase);
         
         var respString = resp.Result.Content.ReadAsStringAsync().Result;
         var project = JsonSerializer.Deserialize<CreatedProject>(respString);
