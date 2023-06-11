@@ -31,7 +31,6 @@ namespace csharp_atlas_rest
             {
                 CreateIssue createIssue = new CreateIssue
                 {
-                    id = null,
                     fields = new Fields()
                     {
                         description = $"Some issue desciption {i}",

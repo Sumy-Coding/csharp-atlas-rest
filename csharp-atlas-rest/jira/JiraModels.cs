@@ -237,17 +237,15 @@ namespace csharp_atlas_rest.jira
         {
             public string name { get; set; }
             public int id { get; set; }
-            public override string ToString()
-            {
-                return $"IssueType: name: {name}, id: {id}";
-            }
+            // public override string ToString()
+            // {
+            //     return $"IssueType: name: {name}, id: {id}";
+            // }
         }
 
         public class Project
         {
-            public string name { get; set; }
             public string key { get; set; }
-            public string id { get; set; }
         }
     }
 

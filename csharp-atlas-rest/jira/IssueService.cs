@@ -26,7 +26,7 @@ public class IssueService
     
     public static string CreateIssue(string host, string token, CreateIssue createIssue)
     {
-        /*
+    /*
          https://developer.atlassian.com/server/jira/platform/jira-rest-api-examples/
          {
             "fields": {
@@ -41,10 +41,10 @@ public class IssueService
                }
            }
         }
-         */
-        
-        // client.DefaultRequestHeaders.Add("Authorization", $"Basic {token}");
-        HttpClient client = new ();
+    */
+
+    HttpClient client = new ();
+        client.DefaultRequestHeaders.Add("Authorization", $"Basic {token}");
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(APP_JSON));
         
         HttpRequestMessage request = new (
@@ -52,10 +52,11 @@ public class IssueService
             $"{host}/rest/api/2/issue/");
 
         string issueJson = JsonSerializer.Serialize(createIssue);
+        Console.WriteLine(issueJson);
         
         request.Content = new StringContent(issueJson, Encoding.UTF8, APP_JSON);
         Task<HttpResponseMessage> resp = client.SendAsync(request);
-        // return Body (content)
+       
         return resp.Result.Content.ReadAsStringAsync().Result.ToString();
     }
 
