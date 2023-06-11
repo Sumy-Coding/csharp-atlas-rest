@@ -11,10 +11,10 @@ namespace csharp_atlas_rest.jira;
 public class IssueService
 {
     private static string APP_JSON = "application/json";
-    static HttpClient client = new ();
 
     public static Issue GetIssue(string host, string token, string key)
     {
+        HttpClient client = new ();
         client.DefaultRequestHeaders.Add("Authorization", $"Basic {token}");
         HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, $"{host}/rest/api/2/issue/{key}");
         Console.WriteLine($"Getting issue with URL = {host} :: {key}");
@@ -43,11 +43,12 @@ public class IssueService
         }
          */
         
-        client.DefaultRequestHeaders.Add("Authorization", $"Basic {token}");
+        // client.DefaultRequestHeaders.Add("Authorization", $"Basic {token}");
+        HttpClient client = new ();
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(APP_JSON));
         
         HttpRequestMessage request = new (
-            HttpMethod.Post, 
+            HttpMethod.Post,
             $"{host}/rest/api/2/issue/");
 
         string issueJson = JsonSerializer.Serialize(createIssue);
@@ -68,7 +69,7 @@ public class IssueService
         string reqJson = JsonSerializer.Serialize(updateIssue);
         request.Content = new StringContent(reqJson, Encoding.UTF8, APP_JSON);
 
-        var resp = IssueService.client.SendAsync(request);
+        var resp = client.SendAsync(request);
         var result = JsonSerializer.Deserialize<Issue>(resp.Result.Content.ReadAsStringAsync().Result);
         if (result != null)
         {

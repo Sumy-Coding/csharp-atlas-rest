@@ -214,6 +214,10 @@ namespace csharp_atlas_rest.jira
             public string self { get; set; }
             public string key { get; set; }
             public Fields fields { get; set; }
+            public override string ToString()
+            {
+                return $"CreateIssue: {id} : {self} : {key} : {fields}";
+            }
         }
 
         public class Fields
@@ -222,12 +226,21 @@ namespace csharp_atlas_rest.jira
             public string description { get; set; }
             public Project project { get; set; }
             public Issuetype issuetype { get; set; }
+
+            public override string ToString()
+            {
+                return $"Fields: {summary} : {description} : {project} : {issuetype}";
+            }
         }
 
         public class Issuetype
         {
             public string name { get; set; }
             public int id { get; set; }
+            public override string ToString()
+            {
+                return $"IssueType: name: {name}, id: {id}";
+            }
         }
 
         public class Project

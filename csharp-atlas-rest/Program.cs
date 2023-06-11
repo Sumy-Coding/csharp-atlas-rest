@@ -10,8 +10,6 @@ namespace csharp_atlas_rest
 {
     class Program
     {
-        private static HttpClient client = new HttpClient();
-
         static async Task Main(string[] args)
         {
             var start = DateTime.Now;
@@ -20,8 +18,7 @@ namespace csharp_atlas_rest
             const string user = "admin";
             const string password = "admin";
             // string token = Environment.GetEnvironmentVariable("TOKEN");
-            string token = System.Convert.ToBase64String(
-                Encoding.UTF8.GetBytes($"{user}:{password}"));
+            string token = System.Convert.ToBase64String(Encoding.UTF8.GetBytes($"{user}:{password}"));
 
             // Actions
 
@@ -30,45 +27,62 @@ namespace csharp_atlas_rest
             // Console.WriteLine(resp);   
 
             // CREATE Issue
-            // for (int i = 0; i < 20; i++)
-            // {
-            //     CreateIssue createIssue = new CreateIssue
-            //     {
-            //         id = null,
-            //     
-            //         fields = new Fields()
-            //         {
-            //             description = $"Some issue desciption {i}",
-            //             issuetype = new Issuetype()
-            //             {
-            //                 id = 10006
-            //             },
-            //             project = new Project()
-            //             {
-            //                 key = "AAA"
-            //             },
-            //             summary = $"AAA Issue {i}"
-            //         }
-            //     };
-            //     Console.WriteLine(createIssue);
-            //     string createdIssue = IssueService.CreateIssue(JIRA_HOST, token, createIssue);
-            //     Console.WriteLine(createdIssue);
-            // }
+            for (int i = 0; i < 1; i++)
+            {
+                CreateIssue createIssue = new CreateIssue
+                {
+                    id = null,
+                    fields = new Fields()
+                    {
+                        description = $"Some issue desciption {i}",
+                        issuetype = new Issuetype()
+                        {
+                            id = 10006
+                        },
+                        project = new Project()
+                        {
+                            key = "AAA"
+                        },
+                        summary = "CCC Issue "
+                    }
+                };
+                Console.WriteLine(createIssue);
+                string createdIssue = IssueService.CreateIssue(JIRA_HOST, token, createIssue);
+                Console.WriteLine(createdIssue);
+            }
 
             // comments
             // var comments = CommentService.GetIssueComments(JIRA_HOST, token, "AAA-5");
             // comments.comments.ForEach(c => Console.WriteLine(c));
 
-            var data = new CreateProject
-            {
-                key = "BBB2",
-                name = "Project BBB 2",
-                projectTypeKey = "software",
-                description = "test"
-                
-            };
-            var project = ProjectService.CreateProject(JIRA_HOST, token, data);
-            Console.WriteLine(project);
+            var createProjJson = @"
+    {   ""key"": ""EX"",
+        ""name"": ""Example"",
+        ""projectTypeKey"": ""business"",
+        ""projectTemplateKey"": ""com.atlassian.jira-core-project-templates:jira-core-project-management"",
+        ""description"": ""Example Project description"",
+        ""lead"": ""Charlie"",
+        ""url"": ""http://atlassian.co"",
+        ""assigneeType"": ""PROJECT_LEAD"",
+        ""avatarId"": 10200,
+        ""issueSecurityScheme"": 10001,
+        ""permissionScheme"": 10011,
+        ""notificationScheme"": 10021,
+        ""workflowSchemeId"": 10031,
+        ""categoryId"": 10120
+    }
+";
+
+            // var data = new CreateProject
+            // {
+            //     key = "BBB2",
+            //     name = "Project BBB 2",
+            //     projectTypeKey = "software",
+            //     description = "test"
+            //     
+            // };
+            // var project = ProjectService.CreateProject(JIRA_HOST, token, data);
+            // Console.WriteLine(project);
 
             // ====== END
             Console.WriteLine($"*** The action took {DateTime.Now.Subtract(start).Milliseconds}");

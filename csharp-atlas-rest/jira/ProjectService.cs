@@ -27,7 +27,7 @@ public class ProjectService
     
     public static CreatedProject CreateProject(string host, string token, CreateProject data)
     {
-        Console.WriteLine($" \u001b[32m Creating \u001b[0m project for {host}");
+        Console.WriteLine($" \u001b[32m Creating\u001b[0m project for {host}");
         
         client.DefaultRequestHeaders.Add("Authorization", $"Basic {token}");
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(APP_JSON));
@@ -37,6 +37,8 @@ public class ProjectService
             $"{host}/rest/api/2/project");
 
         var jsonData = JsonSerializer.Serialize(data);
+        // request.Content = new StringContent(jsonData, Encoding.UTF8, APP_JSON);
+        
         request.Content = new StringContent(jsonData, Encoding.UTF8, APP_JSON);
         Console.WriteLine(jsonData);
 
@@ -61,6 +63,7 @@ public class ProjectService
         
         Task<HttpResponseMessage> resp = client.SendAsync(request);
         Console.WriteLine(resp.Result.StatusCode.ToString());
+        Console.WriteLine(resp.Result.Content.ReadAsStringAsync());
         
         var respString = resp.Result.Content.ReadAsStringAsync().Result;
         var project = JsonSerializer.Deserialize<CreatedProject>(respString);
