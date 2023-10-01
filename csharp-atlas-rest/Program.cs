@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using csharp_atlas_rest.confluence;
 using csharp_atlas_rest.jira;
 using csharp_atlas_rest.jira.Create;
 using csharp_atlas_rest.jira.Projects;
@@ -14,13 +15,24 @@ namespace csharp_atlas_rest
         {
             var start = DateTime.Now;
 
-            const string JIRA_HOST = "http://localhost:9500";
-            const string user = "admin";
-            const string password = "admin";
-            // string token = Environment.GetEnvironmentVariable("TOKEN");
-            string token = System.Convert.ToBase64String(Encoding.UTF8.GetBytes($"{user}:{password}"));
+            string HOST = Environment.GetEnvironmentVariable("ATLAS_URL");
+            string USER = Environment.GetEnvironmentVariable("ATLAS_USER");
+            string PASS = Environment.GetEnvironmentVariable("ATLAS_PASS");
+            string token = System.Convert.ToBase64String(Encoding.UTF8.GetBytes($"{USER}:{PASS}"));
 
-            // Actions
+            var ps = new PageService();
+            var resp = ps.GetPage(HOST, token, "519407997");
+
+            Console.WriteLine(resp);
+            
+            // ====== END
+            Console.WriteLine($"*** The action took {DateTime.Now.Subtract(start).Milliseconds}");
+        }
+
+
+        void jiraRun()
+        {
+             // Actions
 
             // GET issue
             // var resp = JiraService.GetIssue(JIRA_HOST, token, "AAA-1");
@@ -80,11 +92,8 @@ namespace csharp_atlas_rest
                 description = "test"
                 
             };
-            var project = ProjectService.CreateProject(JIRA_HOST, token, data);
-            Console.WriteLine(project);
-
-            // ====== END
-            Console.WriteLine($"*** The action took {DateTime.Now.Subtract(start).Milliseconds}");
+            // var project = ProjectService.CreateProject(JIRA_HOST, token, data);
+            // Console.WriteLine(project);
         }
 
         // async void getAsyncStreamss()
