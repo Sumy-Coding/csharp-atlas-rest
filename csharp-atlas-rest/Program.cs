@@ -15,15 +15,23 @@ namespace csharp_atlas_rest
         {
             var start = DateTime.Now;
 
-            string HOST = Environment.GetEnvironmentVariable("ATLAS_URL");
-            string USER = Environment.GetEnvironmentVariable("ATLAS_USER");
-            string PASS = Environment.GetEnvironmentVariable("ATLAS_PASS");
+            string HOST = Environment.GetEnvironmentVariable("ATLAS_URL")!;
+            string USER = Environment.GetEnvironmentVariable("ATLAS_USER")!;
+            string PASS = Environment.GetEnvironmentVariable("ATLAS_PASS")!;
             string token = System.Convert.ToBase64String(Encoding.UTF8.GetBytes($"{USER}:{PASS}"));
 
             var ps = new PageService();
-            var resp = ps.GetPage(HOST, token, "519407997");
+            // var resp = ps.GetPage(HOST, token, "519407997");
+            //
+            // Console.WriteLine(resp);
 
-            Console.WriteLine(resp);
+            var parentId = "519471120";
+
+            for (int i = 1; i < 20; i++)
+            {
+                ps.CreatePage(HOST, token, $"Csharp TEST PAGE {i}", "Lorem ipsum some test...", "TEST", parentId);
+            }
+            
             
             // ====== END
             Console.WriteLine($"*** The action took {DateTime.Now.Subtract(start).Milliseconds}");

@@ -6,12 +6,14 @@ namespace csharp_atlas_rest.confluence;
 
 public class PageService
 {
-    HttpClient client = new HttpClient();
 
     public string GetPage(string host, string token, string id)
     {
+        HttpClient client = new HttpClient();
+
         client.DefaultRequestHeaders.Add("Authorization", $"Basic {token}");
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        
         HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, $"{host}/rest/api/content/{id}");
 
         var resp = client.SendAsync(request);
@@ -24,8 +26,11 @@ public class PageService
     
     public string CreatePage(string host, string token, string title, string body, string key, string parentId)
     {
+        HttpClient client = new HttpClient();
+
         client.DefaultRequestHeaders.Add("Authorization", $"Basic {token}");
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        
         HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, $"{host}/rest/api/content");
 
         CreatePage createPage = new CreatePage();
@@ -47,7 +52,7 @@ public class PageService
         createPage.ancestors = ancestors;
 
         string pageJson = JsonSerializer.Serialize(createPage);
-        Console.WriteLine(pageJson);
+        // Console.WriteLine(pageJson);
         request.Content = new StringContent(pageJson, Encoding.UTF8, "application/json");
         
         var resp = client.SendAsync(request);
